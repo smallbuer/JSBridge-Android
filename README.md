@@ -1,5 +1,4 @@
 #### JSBridge-Android
-A solution for fast interaction between js and native
 
 ### 简介
 
@@ -14,6 +13,9 @@ A solution for fast interaction between js and native
 同时也扩展了外部webview的扩展方案,例如X5webview的示例，如果使用UC也同理；
 
 欢迎提供好的实现意见与PR；
+
+如果只想解决lzyzsd的[JsBridge]项目调用桥丢失问题，可以参考files目录下的README,将JS文件替换即可；
+
 
 ### 导入SDK
 

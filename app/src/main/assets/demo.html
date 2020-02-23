@@ -68,19 +68,7 @@
             var str1 = document.getElementById("text1").value;
             var str2 = document.getElementById("text2").value;
             var i = 0;
-            //call native method
-            window.Native.callHandlerWithModule(
-                'testMoudle','testMyData'
-                , {'param': '中文测试'}
-                , function(responseData) {
-
-                    console.log('return->['+ i +']'+responseData);
-
-                }
-            );
-
-
-            setInterval(function(){
+            var first = setInterval(function(){
                 //call native method
                 window.WebViewJavascriptBridge.callHandler(
                     'toast'
@@ -89,21 +77,11 @@
                         console.log('return->['+ i++ +']'+responseData);
                     }
                 );
+
+                if(i>500){
+                    clearInterval(first);
+                }
             }, 10);
-            setInterval(function(){
-                //call native method
-                window.WebViewJavascriptBridge.callHandlerWithModule(
-                    'testMoudle','testMyData'
-                    , {'param': '中文测试'}
-                    , function(responseData) {
-
-                        console.log('return->['+ i++ +']'+responseData);
-
-                    }
-                );
-
-            }, 10);
-
 
         }
 
