@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:text="@string/string_name_x5"
+        android:textColor="@android:color/white"
+        android:background="@color/colorAccent"
+        ></TextView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnNativeToJsX5"
+        android:text="Native To JS"
+        />
+
+    <com.smallbuer.jsbridge.demo.view.X5WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/x5Webview"
+        android:layout_weight="1"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:text="@string/string_name_bridgewebview"
+        android:textColor="@android:color/white"
+        android:background="@color/colorAccent"
+        ></TextView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnNativeToJsBridgeWebView"
+        android:text="Native To JS"
+        />
+
+    <com.smallbuer.jsbridge.core.BridgeWebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/bridgeWebview"
+        android:layout_weight="1"
+        />
+
+
+
+
+</LinearLayout>

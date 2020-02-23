@@ -1,0 +1,154 @@
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<!--    <script type="text/javascript" src="WebViewJavascriptBridge.js"></script>-->
+    <title>
+        js调用java
+    </title>
+</head>
+
+<body>
+<p id="show">
+
+</p>
+<p id="init">
+
+</p>
+<p>
+    <input type="text" id="text1" value="username"/>
+</p>
+<p>
+    <input type="text" id="text2" value="password"/>
+</p>
+<p>
+    <input type="button" id="enter" value="调用Native方法(请求)" onclick="testClick();"
+    />
+</p>
+<p>
+    <input type="button" id="enter1" value="调用Native方法(Toast)" onclick="testClick1();"
+    />
+</p>
+<p>
+    <input type="button" id="enter3" value="调用Native方法(高并发测试)" onclick="testClick2();"
+    />
+</p>
+</body>
+<script>
+
+        function testClick() {
+            var str1 = document.getElementById("text1").value;
+            var str2 = document.getElementById("text2").value;
+
+            var data = {url: 'www.baidu.com', userName: str1, passwd: str2};
+            window.WebViewJavascriptBridge.callHandler('request',
+                data
+                , function(responseData) {
+
+                    console.log('native return->'+responseData);
+                }
+            );
+        }
+
+        function testClick1() {
+            var str1 = document.getElementById("text1").value;
+            var str2 = document.getElementById("text2").value;
+            //call native method
+            window.WebViewJavascriptBridge.callHandler(
+                'toast'
+                , {'msg': '中文测试'}
+                , function(responseData) {
+                    console.log('native return->'+responseData);
+                }
+            );
+        }
+
+        function testClick2() {
+
+
+            var str1 = document.getElementById("text1").value;
+            var str2 = document.getElementById("text2").value;
+            var i = 0;
+            //call native method
+            window.Native.callHandlerWithModule(
+                'testMoudle','testMyData'
+                , {'param': '中文测试'}
+                , function(responseData) {
+
+                    console.log('return->['+ i +']'+responseData);
+
+                }
+            );
+
+
+            setInterval(function(){
+                //call native method
+                window.WebViewJavascriptBridge.callHandler(
+                    'toast'
+                    , {'msg': '中文测试'}
+                    , function(responseData) {
+                        console.log('return->['+ i++ +']'+responseData);
+                    }
+                );
+            }, 10);
+            setInterval(function(){
+                //call native method
+                window.WebViewJavascriptBridge.callHandlerWithModule(
+                    'testMoudle','testMyData'
+                    , {'param': '中文测试'}
+                    , function(responseData) {
+
+                        console.log('return->['+ i++ +']'+responseData);
+
+                    }
+                );
+
+            }, 10);
+
+
+        }
+
+
+        function bridgeLog(logContent) {
+            document.getElementById("show").innerHTML = logContent;
+        }
+
+        function connectWebViewJavascriptBridge(callback) {
+            if (window.WebViewJavascriptBridge) {
+                callback(WebViewJavascriptBridge);
+            } else {
+                document.addEventListener(
+                    'WebViewJavascriptBridgeReady'
+                    , function() {
+                        callback(WebViewJavascriptBridge)
+                    },
+                    false
+                );
+            }
+        }
+
+        connectWebViewJavascriptBridge(function(bridge) {
+            bridge.init(function(message, responseCallback) {
+                console.log('JS got a message', message);
+                var data = {
+                    'Javascript Responds': '测试中文!'
+                };
+
+                if (responseCallback) {
+                    console.log('JS responding with', data);
+                    responseCallback(data);
+                }
+            });
+
+            bridge.registerHandler("functionInJs", function(data, responseCallback) {
+                document.getElementById("show").innerHTML = ("data from Java: = " + data);
+                if (responseCallback) {
+                    var responseData = "Javascript Says Right back aka!";
+                    responseCallback(responseData);
+                }
+            });
+        })
+
+</script>
+
+</html>
+
