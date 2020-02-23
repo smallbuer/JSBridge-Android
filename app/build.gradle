@@ -26,9 +26,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    //implementation project(':jsbridge')
+    implementation project(':jsbridge')
 
-    implementation 'com.smallbuer:jsbridge:1.0.0'
+    //implementation 'com.smallbuer:jsbridge:1.0.0'
 
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

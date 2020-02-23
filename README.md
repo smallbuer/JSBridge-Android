@@ -1,6 +1,8 @@
 #### JSBridge-Android
 A solution for fast interaction between js and native
 
+### 简介
+
 本项目来源于 lzyzsd的[JsBridge](https://github.com/lzyzsd/JsBridge)，由于作者长时间未修复部分代码丢失问题，所以目前存在的调用丢失问题以及效率问题无法在原项目得到回应，所以重构了目前js文件以及java类；
 
 主要修改如下：
@@ -11,6 +13,135 @@ A solution for fast interaction between js and native
 本项目保持和lzyzsd老用户的兼容性，内部也重构了BridgeWebView的实现，直接作为View使用即可；
 同时也扩展了外部webview的扩展方案,例如X5webview的示例，如果使用UC也同理；
 
+欢迎提供好的实现意见与PR；
 
+### 导入SDK
+
+1.在项目的根目录build.gradle中的repositories 添加:
+```
+
+repositories {
+        jcenter()
+}
+```
+2.然后在模块的build.gradle(Module) 的 dependencies 添加:
+```
+
+dependencies {
+      implementation 'com.smallbuer:jsbridge:1.0.0'
+}
+```
+
+### 使用步骤
+
+1.新增原生功能module
+> 继承 BridgeHandler并实现handler方法，例如：
+
+```
+
+public class ToastBridgeHandler extends BridgeHandler {
+
+    @Override
+    public void handler(Context context,String data, CallBackFunction function) {
+
+        Toast.makeText(context,"data:"+data,Toast.LENGTH_SHORT).show();
+
+        function.onCallBack("{\"status\":\"0\",\"msg\":\"吐司成功\"}");
+
+    }
+}
+```
+
+2.原生功能注册
+>对所有的原生功能进行全局注册，分为两种方式，推荐方式二；这里注册的桥名也是H5调用时传递的方法名称；
+
+方式一：
+```
+    //style 1
+    Bridge.INSTANCE.registerHandler(HandlerName.HANDLER_NAME_TOAST, ToastBridgeHandler())        
+    Bridge.INSTANCE.registerHandler(HandlerName.HANDLER_NAME_PHOTO, PhotoBridgeHandler())
+    Bridge.INSTANCE.registerHandler(HandlerName.HANDLER_NAME_REQUEST, RequestBridgeHandler())
+```
+方式二：
+
+```
+    //style 2
+    var handlerMap = HashMap<String,BridgeHandler>();
+    handlerMap[HandlerName.HANDLER_NAME_TOAST] = ToastBridgeHandler()
+    handlerMap[HandlerName.HANDLER_NAME_PHOTO] = PhotoBridgeHandler()
+    handlerMap[HandlerName.HANDLER_NAME_REQUEST] = RequestBridgeHandler()
+    Bridge.INSTANCE.registerHandler(handlerMap)
+```
+
+其中HandlerName.HANDLER_NAME_TOAST等常量即为原生功能的名称标示，用于H5调用需要指定，参考4
+
+
+
+
+3.使用方法
+
+>直接使用封装好的BridgeWebview,基于系统自带webview;
+
+（1）xml中导入
+```
+<com.smallbuer.jsbridge.core.BridgeWebView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/bridgeWebview"
+    android:layout_weight="1"
+    />
+```
+（2）代码中使用
+```
+bridgeWebview.loadUrl(url)
+
+//原生调用H5，functionInJs是H5为原生注册的桥名，参考demo.html
+bridgeWebview.callHandler("functionInJs", "我是原生传递的参数") { data ->
+                Log.i(TAG, "reponse data from js $data")
+            }
+```
+
+
+>外部扩展其他webview,比如X5内核，uc内核等，源码请参考demo中X5WebView实现
+
+（1）新建X5WebView继承X5包内的webview并实现IWebView接口<br>
+（2）在X5WebView中新建BridgeTiny并传入X5WebView对应，BridgeTiny作为一个webview的管理类；<br> 
+（3）在webview执行onPageFinished时，加载js文件内容用于执行对象的注册；<br>
+（4）在webview执行destroy时清空使用内存；<br>
+
+使用API如下：<br>
+
+（1）xml中导入
+```
+    <com.smallbuer.jsbridge.demo.view.X5WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/x5Webview"
+        android:layout_weight="1"
+        />
+```
+
+（2）代码中使用
+```
+x5Webview.loadUrl(url)
+
+//原生调用H5，functionInJs是H5为原生注册的桥名，参考demo.html
+x5Webview.callHandler("functionInJs", "我是原生传递的参数") { data ->
+    Log.i(TAG, "reponse data from js $data")
+}
+```
+
+4.H5调用
+
+>H5中可以自己封装调用名称，适合Vue.js或者存js调用;
+```
+window.WebViewJavascriptBridge.callHandler(
+                'toast'                     //桥注册的名称ID
+                , {'msg': '中文测试'}        //传递给原生的参数
+                , function(responseData) {  //异步回调接口
+                    console.log('native return->'+responseData);
+                }
+            );
+```
 
 
