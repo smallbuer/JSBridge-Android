@@ -15,6 +15,13 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -28,8 +35,10 @@ dependencies {
 
     implementation project(':jsbridge')
 
-    //implementation 'com.smallbuer:jsbridge:1.0.0'
-
+    //implementation 'com.smallbuer:jsbridge:1.0.1'
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.1'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'

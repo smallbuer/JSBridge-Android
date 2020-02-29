@@ -1,5 +1,7 @@
 #### JSBridge-Android
 
+
+
 ### 简介
 
 本项目来源于 lzyzsd的[JsBridge](https://github.com/lzyzsd/JsBridge)，由于作者长时间未修复部分代码丢失问题，所以目前存在的调用丢失问题以及效率问题无法在原项目得到回应，所以重构了目前js文件以及java类；
@@ -16,6 +18,7 @@
 
 如果只想解决lzyzsd的[JsBridge]项目调用桥丢失问题，可以参考files目录下的README,将JS文件替换即可；
 
+jscript文件下的js文件为新版本SDK内部字符串压缩前的原文件；
 
 ### 导入SDK
 
@@ -30,9 +33,13 @@ repositories {
 ```
 
 dependencies {
-      implementation 'com.smallbuer:jsbridge:1.0.0'
+      implementation 'com.smallbuer:jsbridge:1.0.1'
 }
 ```
+
+注：内部需要借助于GSON库，使用外部依赖；
+
+
 
 ### 使用步骤
 
@@ -108,7 +115,7 @@ bridgeWebview.callHandler("functionInJs", "我是原生传递的参数") { data 
 
 （1）新建X5WebView继承X5包内的webview并实现IWebView接口<br>
 （2）在X5WebView中新建BridgeTiny并传入X5WebView对应，BridgeTiny作为一个webview的管理类；<br> 
-（3）在webview执行onPageFinished时，加载js文件内容用于执行对象的注册；<br>
+（3）在webview执行onPageFinished时，加载js脚本内容用于执行对象的注册；<br>
 （4）在webview执行destroy时清空使用内存；<br>
 
 使用API如下：<br>

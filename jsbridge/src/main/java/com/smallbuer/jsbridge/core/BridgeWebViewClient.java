@@ -74,7 +74,7 @@ class BridgeWebViewClient extends WebViewClient {
             super.onPageFinished(view, url);
         }
 
-        bridgeTiny.webViewLoadJs(bridgeWebView,BridgeUtil.JAVA_SCRIPT);
+        bridgeTiny.webViewLoadJs(bridgeWebView);
 
     }
 

@@ -13,7 +13,7 @@ public class ToastBridgeHandler extends BridgeHandler {
 
         Toast.makeText(context,"data:"+data,Toast.LENGTH_SHORT).show();
 
-        function.onCallBack("{\"status\":\"0\",\"msg\":\"吐司成功\"}");
+        function.onCallBack("{\"status\":\"0\",\"msg\":\"toast success\"}");
 
     }
 }

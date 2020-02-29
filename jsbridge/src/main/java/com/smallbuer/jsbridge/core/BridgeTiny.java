@@ -6,7 +6,9 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+
 import com.google.gson.Gson;
+
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +27,7 @@ public class BridgeTiny {
     public BridgeTiny(IWebView webView){
 
         this.mWebView = webView;
-        webView.addJavascriptInterface(new BridgeJavascritInterface(mCallbacks, this,webView),"android");
+        webView.addJavascriptInterface(new BridgeJavascritInterface(mCallbacks, this,webView),"jsbridge");
         mMessageHandlers.putAll(Bridge.INSTANCE.getMessageHandlers());
 
     }
@@ -34,17 +36,10 @@ public class BridgeTiny {
         return mMessageHandlers;
     }
 
-    /**
-     * js文件将注入为第一个script引用
-     * @param view WebView
-     * @param url url
-     */
-    public void webViewLoadJs(IWebView view, String url){
 
-        String js = "var newscript = document.createElement(\"script\");";
-        js += "newscript.src=\"" + url + "\";";
-        js += "document.scripts[0].parentNode.insertBefore(newscript,document.scripts[0]);";
-        view.loadUrl(String.format(BridgeUtil.JAVASCRIPT_STR,js));
+    public void webViewLoadJs(IWebView view) {
+
+        view.loadUrl(String.format(BridgeUtil.JAVASCRIPT_STR,BridgeUtil.WebviewJavascriptBridge));
 
         if (mMessages != null) {
             for (Object message : mMessages) {

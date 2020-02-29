@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import androidx.annotation.Nullable;
+
 import com.smallbuer.jsbridge.core.BridgeTiny;
 import com.smallbuer.jsbridge.core.BridgeUtil;
 import com.smallbuer.jsbridge.core.IWebView;
@@ -54,7 +56,7 @@ public class X5WebView extends WebView implements IWebView {
 
 	private WebViewClient client = new WebViewClient() {
 		/**
-		 * 防止加载网页时调起系统浏览器
+		 * prevent system browser from launching when web page loads
 		 */
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			view.loadUrl(url);
@@ -64,9 +66,8 @@ public class X5WebView extends WebView implements IWebView {
 		@Override
 		public void onPageFinished(WebView webView, String s) {
 			super.onPageFinished(webView, s);
-			bridgeTiny.webViewLoadJs((IWebView) webView,BridgeUtil.JAVA_SCRIPT);
+			bridgeTiny.webViewLoadJs((IWebView) webView);
 		}
-
 
 	};
 
@@ -77,11 +78,13 @@ public class X5WebView extends WebView implements IWebView {
 	}
 
 	@Override
-	public void evaluateJavascript(String var1, Object object) {
+	public void evaluateJavascript(String var1,@Nullable Object object) {
+		if(object == null){
+			super.evaluateJavascript(var1, null);
+			return;
+		}
 		super.evaluateJavascript(var1, (ValueCallback<String>) object);
 	}
-
-
 
 	@Override
 	public void callHandler(String handlerName, Object data, OnBridgeCallback responseCallback) {

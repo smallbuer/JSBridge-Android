@@ -19,6 +19,8 @@ class App :Application(){
     override fun onCreate() {
         super.onCreate()
 
+        Bridge.INSTANCE.openLog()
+
         initX5()
 
         initJsBridgeHandler()

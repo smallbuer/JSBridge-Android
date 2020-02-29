@@ -15,8 +15,8 @@ public class RequestBridgeHandler extends BridgeHandler {
 
         BridgeLog.d(TAG,"data->"+data);
 
-        //进行网络请求.....
-        //回调
+        //a network request .....
+        //callback
         function.onCallBack("{\"status\":\"0\",\"msg\":\"请求成功\"}");
 
     }
