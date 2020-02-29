@@ -1,7 +1,5 @@
 #### JSBridge-Android
-
-
-
+[ ![Download](https://api.bintray.com/packages/smallbuer/tools/jsbridge/images/download.svg?version=1.0.1) ](https://bintray.com/smallbuer/tools/jsbridge/1.0.1/link)   [![Release Version](https://img.shields.io/badge/release-1.0.1-red.svg)](https://github.com/smallbuer/JSBridge-Android/releases)   [![Platform](https://img.shields.io/badge/Platform-Android-brightgreen.svg)](https://github.com/smallbuer/JSBridge-Android)
 ### 简介
 
 本项目来源于 lzyzsd的[JsBridge](https://github.com/lzyzsd/JsBridge)，由于作者长时间未修复部分代码丢失问题，所以目前存在的调用丢失问题以及效率问题无法在原项目得到回应，所以重构了目前js文件以及java类；
@@ -154,3 +152,6 @@ window.WebViewJavascriptBridge.callHandler(
 ```
 
 
+## License
+
+JSBridge-Android is [Apache-2.0 licensed](./LICENSE).
