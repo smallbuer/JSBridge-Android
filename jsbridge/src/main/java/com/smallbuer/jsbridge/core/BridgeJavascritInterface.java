@@ -26,14 +26,22 @@ public class BridgeJavascritInterface extends BaseJavascriptInterface {
     }
 
     @JavascriptInterface
-    public void handler(String handlerName,String data, String callbackId) {
+    public void handler(final String handlerName, final String data, final String callbackId) {
         if(TextUtils.isEmpty(handlerName)){
             return;
         }
-        if(mBridge.getMessageHandlers().containsKey(handlerName)){
-            BridgeHandler bridgeHandler = mBridge.getMessageHandlers().get(handlerName);
-            bridgeHandler.handler(mWebView.getContext(),data, new CallBack(callbackId));
-        }
+        //change to main thread
+        mMainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                if(mBridge.getMessageHandlers().containsKey(handlerName)){
+                    BridgeHandler bridgeHandler = mBridge.getMessageHandlers().get(handlerName);
+                    bridgeHandler.handler(mWebView.getContext(),data, new CallBack(callbackId));
+                }
+            }
+        });
+
     }
 
     public class CallBack implements CallBackFunction{

@@ -12,6 +12,11 @@ v1.0.1
 2.修复1.0.0版本中WebViewJavascriptBridge.js以js脚本引入路径错误不生效问题，   
   修改为直接使用webview.loadurl(javascript:str)方式插入H5中；
 
+v1.0.2
+
+1.h5调用原生和回调原生后切换线程到main线程,便于后续业务的处理  
+
+
 
 
 

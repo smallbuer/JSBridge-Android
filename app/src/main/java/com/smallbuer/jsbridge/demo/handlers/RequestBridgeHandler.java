@@ -13,7 +13,7 @@ public class RequestBridgeHandler extends BridgeHandler {
     @Override
     public void handler(Context context,String data, CallBackFunction function) {
 
-        BridgeLog.d(TAG,"data->"+data);
+        BridgeLog.d(TAG,"data->"+data+",Thread is "+Thread.currentThread().getName());
 
         //a network request .....
         //callback

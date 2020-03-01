@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         btnNativeToJsX5.setOnClickListener{
 
             x5Webview.callHandler("functionInJs", "我是原生传递的参数") { data ->
-                Log.i(TAG, "reponse data from js $data")
+                Log.i(TAG, "reponse data from js $data"+",Thread is "+Thread.currentThread().name)
             }
         }
 
@@ -75,7 +75,9 @@ class MainActivity : AppCompatActivity() {
         btnNativeToJsBridgeWebView.setOnClickListener{
 
             bridgeWebview.callHandler("functionInJs", "我是原生传递的参数") { data ->
-                Log.i(TAG, "reponse data from js $data")
+
+
+                Log.i(TAG, "reponse data from js $data"+",Thread is "+Thread.currentThread().name)
             }
         }
 

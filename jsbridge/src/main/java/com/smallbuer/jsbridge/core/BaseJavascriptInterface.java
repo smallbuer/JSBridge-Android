@@ -1,5 +1,7 @@
 package com.smallbuer.jsbridge.core;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
@@ -9,7 +11,7 @@ import java.util.Map;
 public abstract class BaseJavascriptInterface {
 
     private String TAG = "BaseJavascriptInterface";
-
+    Handler mMainHandler = new Handler(Looper.getMainLooper());
     private Map<String, OnBridgeCallback> mCallbacks;
 
     public BaseJavascriptInterface(Map<String, OnBridgeCallback> callbacks) {
@@ -22,13 +24,20 @@ public abstract class BaseJavascriptInterface {
     }
 
     @JavascriptInterface
-    public void response(String data, String responseId) {
-        Log.d(TAG, "response->"+data + ", responseId: " + responseId + " " + Thread.currentThread().getName());
+    public void response(final String data, final String responseId) {
+
+        BridgeLog.d(TAG, "response->"+data + ", responseId: " + responseId + " " + Thread.currentThread().getName());
+
         if (!TextUtils.isEmpty(responseId)) {
-            OnBridgeCallback function = mCallbacks.remove(responseId);
-            if (function != null) {
-                function.onCallBack(data);
-            }
+            mMainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    OnBridgeCallback function = mCallbacks.remove(responseId);
+                    if (function != null) {
+                            function.onCallBack(data);
+                        }
+                    }
+            });
         }
     }
 
