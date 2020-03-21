@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">JSBridge</string>
     <string name="string_name_x5">X5 WebView</string>
     <string name="string_name_bridgewebview">BridgeWebView</string>
 </resources>
