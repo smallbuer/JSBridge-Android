@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">JSBridge</string>
-    <string name="string_name_x5">X5 WebView</string>
+    <string name="string_name_extend">Extend WebView</string>
+    <string name="string_name_uc">UC WebView</string>
     <string name="string_name_bridgewebview">BridgeWebView</string>
 </resources>

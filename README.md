@@ -10,7 +10,7 @@
 
 
 本项目保持和lzyzsd老用户的兼容性，内部也重构了BridgeWebView的实现，直接作为View使用即可；
-同时也扩展了外部webview的扩展方案,例如X5webview的示例，如果使用UC也同理；
+同时也扩展了外部webview的扩展方案,例如X5webview,UC内核(官方申请合作使用,此demo供学习使用)的示例；
 
 欢迎提供好的实现意见与PR；
 

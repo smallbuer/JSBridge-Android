@@ -1,6 +1,7 @@
 package com.smallbuer.jsbridge.demo.handlers;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.smallbuer.jsbridge.core.BridgeHandler;
 import com.smallbuer.jsbridge.core.BridgeLog;
@@ -17,6 +18,7 @@ public class RequestBridgeHandler extends BridgeHandler {
 
         //a network request .....
         //callback
+        Toast.makeText(context,"request data :"+data,Toast.LENGTH_SHORT).show();
         function.onCallBack("{\"status\":\"0\",\"msg\":\"请求成功\"}");
 
     }

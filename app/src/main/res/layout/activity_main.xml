@@ -7,50 +7,79 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:gravity="center_vertical"
-        android:text="@string/string_name_x5"
-        android:textColor="@android:color/white"
         android:background="@color/colorAccent"
-        ></TextView>
+        android:gravity="center_vertical"
+        android:text="@string/string_name_extend"
+        android:textColor="@android:color/white"></TextView>
+
+
+    <RadioGroup
+        android:id="@+id/group1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    <RadioButton
+        android:id="@+id/radioX5WebView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="X5WebView"/>
+    <RadioButton
+        android:id="@+id/radioUcWebView"
+        android:checked="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UCWebView"/>
+
+    </RadioGroup>
 
     <Button
+        android:id="@+id/btnNativeToJsX5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnNativeToJsX5"
-        android:text="Native To JS"
-        />
+        android:text="Native To JS" />
 
     <com.smallbuer.jsbridge.demo.view.X5WebView
+        android:id="@+id/x5Webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/x5Webview"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btnNativeToJsUc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="Native To JS" />
+
+    <com.smallbuer.jsbridge.demo.view.X5WebView
+        android:id="@+id/ucWebview"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:background="@color/colorAccent"
         android:gravity="center_vertical"
         android:text="@string/string_name_bridgewebview"
-        android:textColor="@android:color/white"
-        android:background="@color/colorAccent"
-        ></TextView>
+        android:textColor="@android:color/white"></TextView>
 
     <Button
+        android:id="@+id/btnNativeToJsBridgeWebView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnNativeToJsBridgeWebView"
-        android:text="Native To JS"
-        />
+        android:text="Native To JS" />
 
     <com.smallbuer.jsbridge.core.BridgeWebView
+        android:id="@+id/bridgeWebview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/bridgeWebview"
-        android:layout_weight="1"
-        />
-
-
+        android:layout_weight="1" />
 
 
 </LinearLayout>

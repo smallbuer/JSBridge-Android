@@ -3,26 +3,26 @@ package com.smallbuer.jsbridge.demo.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.webkit.ValueCallback;
+
 import androidx.annotation.Nullable;
+
 import com.smallbuer.jsbridge.core.BridgeTiny;
 import com.smallbuer.jsbridge.core.IWebView;
 import com.smallbuer.jsbridge.core.OnBridgeCallback;
-import com.tencent.smtt.sdk.ValueCallback;
-import com.tencent.smtt.sdk.WebSettings;
-import com.tencent.smtt.sdk.WebSettings.LayoutAlgorithm;
-import com.tencent.smtt.sdk.WebView;
-import com.tencent.smtt.sdk.WebViewClient;
+import com.uc.webview.export.WebSettings;
+import com.uc.webview.export.WebView;
+import com.uc.webview.export.WebViewClient;
 
-public class X5WebView extends WebView implements IWebView {
+public class UCWebView extends WebView implements IWebView {
 
 	private BridgeTiny bridgeTiny;
 
 	@SuppressLint("SetJavaScriptEnabled")
-	public X5WebView(Context arg0, AttributeSet arg1) {
+	public UCWebView(Context arg0, AttributeSet arg1) {
 		super(arg0, arg1);
 		this.setWebViewClient(client);
 		initWebViewSettings();
-		this.getView().setClickable(true);
 		bridgeTiny = new BridgeTiny(this);
 	}
 
@@ -31,7 +31,7 @@ public class X5WebView extends WebView implements IWebView {
 		webSetting.setJavaScriptEnabled(true);
 		webSetting.setJavaScriptCanOpenWindowsAutomatically(true);
 		webSetting.setAllowFileAccess(true);
-		webSetting.setLayoutAlgorithm(LayoutAlgorithm.NARROW_COLUMNS);
+		webSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
 		webSetting.setSupportZoom(true);
 		webSetting.setBuiltInZoomControls(true);
 		webSetting.setUseWideViewPort(true);
