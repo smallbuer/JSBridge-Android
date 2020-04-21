@@ -60,9 +60,6 @@
     }
     // 调用线程
     function callHandler(handlerName, data, responseCallback) {
-
-        console.log("jsbridge-1--callHandler-name:>"+handlerName);
-
         _doSend({
             handlerName: handlerName,
             data: data
@@ -71,8 +68,6 @@
 
     //sendMessage add message, 触发native处理 sendMessage
     function _doSend(message, responseCallback) {
-
-        console.log("jsbridge-2--_doSend->handlerName:"+message.handlerName);
 
         if (responseCallback) {
             var callbackId = 'cb_' + (uniqueId++) + '_' + new Date().getTime();
@@ -88,7 +83,6 @@
     // 提供给native调用,该函数作用:获取sendMessageQueue返回给native,由于android不能直接获取返回的内容,所以使用url shouldOverrideUrlLoading 的方式返回内容
     function _fetchQueue() {
 
-        console.log("jsbridge-3--_fetchQueue->"+JSON.stringify(sendMessageQueue));
         // 空数组直接返回
         if (sendMessageQueue.length === 0) {
           return;
@@ -97,16 +91,12 @@
 
         var msgQueueLen = sendMessageQueue.length;
 
-        console.log("jsbridge-3--->msgQueueLen:"+msgQueueLen);
-
         var msgQueueIframeTag = 'iframe_'+ new Date().getTime();
 
         for(var i=0;i<msgQueueLen;i++){
             var sendMsgItem = sendMessageQueue[i];
             msgQueueIframeHandlers[sendMsgItem.callbackId] = msgQueueIframeTag;
         }
-
-        console.log("jsbridge--msgQueueIframeTag=="+msgQueueIframeTag);
 
         var messageQueueString = JSON.stringify(sendMessageQueue);
         sendMessageQueue = [];
@@ -119,14 +109,10 @@
 
         msgQueueIframeId.push(iframe.id);
 
-        console.log("jsbridge--创建完毕->id:"+iframe.id);
-
          var iframesTest1 = doc.getElementsByTagName("iframe");
-         console.log("jsbridge--创建完毕->当前有iframe数量"+iframesTest1.length);
-         console.log("jsbridge--msgQueueIframeId:"+msgQueueIframeId);
+
          if(iframesTest1.length > maxIframeCount){
             var iframeId = msgQueueIframeId.shift();
-            console.log("jsbridge--iframeId->iframeId:"+iframeId);
             var iframe = doc.getElementById(iframeId);
             iframe.parentNode.removeChild(iframe);
          }
@@ -134,11 +120,6 @@
 
     //提供给native使用,
     function _dispatchMessageFromNative(messageJSON) {
-
-        console.log("jsbridge-4--_dispatchMessageFromNative->"+messageJSON);
-
-        //console.log("js-lulu---_dispatchMessageFromNative1");
-
         setTimeout(function() {
             var message = JSON.parse(messageJSON);
             var responseCallback;
@@ -150,11 +131,9 @@
                 }
                 responseCallback(message.responseData);
                 delete responseCallbacks[message.responseId];
-                console.log("jsbridge--回调完毕->message.responseId:"+message.responseId);
                 //移除iframe
                 destroyIframe(message.responseId);
             } else {
-            console.log("jsbridge--直接发送->message.callbackId:"+message.responseId);
                 //直接发送
                 if (message.callbackId) {
                     var callbackResponseId = message.callbackId;
