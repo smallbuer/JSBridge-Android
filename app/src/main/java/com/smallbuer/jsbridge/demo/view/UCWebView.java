@@ -7,21 +7,26 @@ import android.webkit.ValueCallback;
 
 import androidx.annotation.Nullable;
 
+import com.smallbuer.jsbridge.core.BridgeLog;
 import com.smallbuer.jsbridge.core.BridgeTiny;
 import com.smallbuer.jsbridge.core.IWebView;
 import com.smallbuer.jsbridge.core.OnBridgeCallback;
+import com.uc.webview.export.JsPromptResult;
+import com.uc.webview.export.WebChromeClient;
 import com.uc.webview.export.WebSettings;
 import com.uc.webview.export.WebView;
 import com.uc.webview.export.WebViewClient;
 
 public class UCWebView extends WebView implements IWebView {
 
+	private String TAG = "UCWebView";
 	private BridgeTiny bridgeTiny;
 
 	@SuppressLint("SetJavaScriptEnabled")
 	public UCWebView(Context arg0, AttributeSet arg1) {
 		super(arg0, arg1);
 		this.setWebViewClient(client);
+		this.setWebChromeClient(chromeClient);
 		initWebViewSettings();
 		bridgeTiny = new BridgeTiny(this);
 	}
@@ -66,6 +71,17 @@ public class UCWebView extends WebView implements IWebView {
 			bridgeTiny.webViewLoadJs((IWebView) webView);
 		}
 
+	};
+
+	private WebChromeClient chromeClient = new WebChromeClient(){
+		@Override
+		public boolean onJsPrompt(WebView webView, String url, String message, String defaultValue, JsPromptResult jsPromptResult) {
+			BridgeLog.d(TAG,"message->"+message);
+			bridgeTiny.onJsPrompt(UCWebView.this,message);
+			//don't delete this line
+			jsPromptResult.confirm("do");
+			return true;
+		}
 	};
 
 	@Override

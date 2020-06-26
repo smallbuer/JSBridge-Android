@@ -3,24 +3,30 @@ package com.smallbuer.jsbridge.demo.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
+
 import androidx.annotation.Nullable;
+
+import com.smallbuer.jsbridge.core.BridgeLog;
 import com.smallbuer.jsbridge.core.BridgeTiny;
 import com.smallbuer.jsbridge.core.IWebView;
 import com.smallbuer.jsbridge.core.OnBridgeCallback;
+import com.tencent.smtt.export.external.interfaces.JsPromptResult;
 import com.tencent.smtt.sdk.ValueCallback;
+import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebSettings.LayoutAlgorithm;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
 public class X5WebView extends WebView implements IWebView {
-
+	private String TAG = "X5WebView";
 	private BridgeTiny bridgeTiny;
 
 	@SuppressLint("SetJavaScriptEnabled")
 	public X5WebView(Context arg0, AttributeSet arg1) {
 		super(arg0, arg1);
 		this.setWebViewClient(client);
+		this.setWebChromeClient(chromeClient);
 		initWebViewSettings();
 		this.getView().setClickable(true);
 		bridgeTiny = new BridgeTiny(this);
@@ -67,6 +73,21 @@ public class X5WebView extends WebView implements IWebView {
 		}
 
 	};
+
+	private WebChromeClient chromeClient = new WebChromeClient(){
+		@Override
+		public boolean onJsPrompt(WebView webView, String url,String message, String defaultValue, JsPromptResult jsPromptResult) {
+			BridgeLog.d(TAG,"message->"+message);
+			bridgeTiny.onJsPrompt(X5WebView.this,message);
+			//don't delete this line
+			jsPromptResult.confirm("do");
+			return true;
+		}
+	};
+
+
+
+
 
 	@Override
 	public void destroy() {

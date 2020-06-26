@@ -36,13 +36,11 @@
     }
     // 调用线程
     function callHandler(handlerName, data, responseCallback) {
-
         _doSend('jsbridge',handlerName, data, responseCallback);
     }
 
     // 调用线程
     function callHandlerWithModule(moduleName,handlerName, data, responseCallback) {
-
         _doSend(moduleName,handlerName, data, responseCallback);
     }
 
@@ -58,39 +56,12 @@
         }else{
             callbackId = '';
         }
-        try {
-             var evalStr1 = 'window.'+ moduleName + '.';
-             if(moduleName == 'jsbridge'&& handlerName!='response'){
-                //默认实现方法名
-                evalStr1 += 'handler';
-             }else{
-                evalStr1 += handlerName;
-             }
-             //可计算某个字符串，并执行其中的的 JavaScript 代码
-             var fn = eval(evalStr1);
-         } catch(e) {
-             console.log(e);
-         }
-         if (typeof fn === 'function'){
-
-             var evalStr = 'window.'+moduleName;
-
-             var fnwindow = eval(evalStr);
-             var responseData;
-             if(moduleName == 'jsbridge'&& handlerName !='response'){
-                responseData = fn.call(fnwindow,handlerName,JSON.stringify(message),callbackId);
-             }else{
-                responseData = fn.call(fnwindow,JSON.stringify(message),callbackId);
-             }
-             if(responseData){
-                 responseCallback = responseCallbacks[callbackId];
-                 if (!responseCallback) {
-                     return;
-                  }
-                 responseCallback(responseData);
-                 delete responseCallbacks[callbackId];
-             }
-         }
+        //正常JS桥调用
+        if(moduleName == 'jsbridge'&& handlerName!='response'){
+            prompt('{\"handlerName\":' + handlerName + ',\"data\":' +  JSON.stringify(message) + ',\"callbackId\":' +  callbackId + '}');
+        }else{
+            prompt('{\"data\":' +  JSON.stringify(message) + ',\"callbackId\":' +  callbackId + '}');
+        }
     }
 
     //提供给WebViewJavascriptBridge使用,
@@ -114,14 +85,15 @@
                         _doSend('jsbridge','response', responseData, callbackResponseId);
                     };
                 }
-
+                var msgData = message.data;
                 var handler = WebViewJavascriptBridge._messageHandler;
+
                 if (message.handlerName) {
                     handler = messageHandlers[message.handlerName];
                 }
                 //查找指定handler
                 try {
-                    handler(message.data, responseCallback);
+                    handler(msgData, responseCallback);
                 } catch (exception) {
                     if (typeof console != 'undefined') {
                         console.log("WebViewJavascriptBridge: WARNING: javascript handler threw.", message, exception);
@@ -138,7 +110,6 @@
             receiveMessageQueue.push(messageJSON);
         }
         _dispatchMessageFromNative(messageJSON);
-       
     }
 
     var WebViewJavascriptBridge = window.WebViewJavascriptBridge = {

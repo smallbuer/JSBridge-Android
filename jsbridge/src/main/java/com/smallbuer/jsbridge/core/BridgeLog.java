@@ -2,7 +2,11 @@ package com.smallbuer.jsbridge.core;
 
 import android.util.Log;
 
-
+/**
+ * Created on 2019/12/10.
+ * Author: smallbuer
+ * BridgeLog
+ */
 public class BridgeLog {
 
 

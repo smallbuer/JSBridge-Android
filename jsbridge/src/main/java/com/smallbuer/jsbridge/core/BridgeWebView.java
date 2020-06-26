@@ -8,7 +8,11 @@ import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
+/**
+ * Created on 2019/12/10.
+ * Author: smallbuer
+ * BridgeWebView
+ */
 @SuppressLint("SetJavaScriptEnabled")
 public class BridgeWebView extends WebView implements IWebView {
 
@@ -16,11 +20,12 @@ public class BridgeWebView extends WebView implements IWebView {
     private String TAG = "BridgeWebView";
     private BridgeTiny bridgeTiny;
     private BridgeWebViewClient mClient;
-
+    private BridgeWebviewChromeClient mChromeClient;
     public BridgeWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
+
 
     public BridgeWebView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -43,11 +48,11 @@ public class BridgeWebView extends WebView implements IWebView {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Bridge.INSTANCE.getDEBUG()) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
-
         bridgeTiny = new BridgeTiny(this);
-
         mClient = new BridgeWebViewClient(this,bridgeTiny);
+        mChromeClient = new BridgeWebviewChromeClient(this,bridgeTiny);
         super.setWebViewClient(mClient);
+        super.setWebChromeClient(mChromeClient);
     }
 
     @Override
@@ -64,7 +69,9 @@ public class BridgeWebView extends WebView implements IWebView {
 
     @Override
     public void evaluateJavascript(String var1, Object object) {
-        super.evaluateJavascript(var1, (ValueCallback<String>) object);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            super.evaluateJavascript(var1, (ValueCallback<String>) object);
+        }
     }
 
     @Override

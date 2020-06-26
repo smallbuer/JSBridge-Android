@@ -6,7 +6,7 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 14
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -39,7 +39,7 @@ publish {
     repoName = 'tools'
     groupId = 'com.smallbuer'
     artifactId = 'jsbridge'
-    publishVersion = '1.0.2'
+    publishVersion = '1.0.3'
     desc = 'jsbridge for android'
     website = 'https://github.com/smallbuer/JSBridge-Android'
 }

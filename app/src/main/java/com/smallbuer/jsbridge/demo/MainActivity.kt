@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_main.*
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() , RadioGroup.OnCheckedChangeListener {
 
             x5Webview.callHandler("functionInJs", "我是原生传递的参数") { data ->
                 Log.i(TAG, "reponse data from js $data"+",Thread is "+Thread.currentThread().name)
+                Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -69,8 +71,8 @@ class MainActivity : AppCompatActivity() , RadioGroup.OnCheckedChangeListener {
 
             bridgeWebview.callHandler("functionInJs", "我是原生传递的参数") { data ->
 
-
                 Log.i(TAG, "reponse data from js $data"+",Thread is "+Thread.currentThread().name)
+                Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -91,6 +93,7 @@ class MainActivity : AppCompatActivity() , RadioGroup.OnCheckedChangeListener {
 
             ucWebview.callHandler("functionInJs", "我是原生传递的参数") { data ->
                 Log.i(TAG, "reponse data from js $data"+",Thread is "+Thread.currentThread().name)
+                Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
             }
         }
 

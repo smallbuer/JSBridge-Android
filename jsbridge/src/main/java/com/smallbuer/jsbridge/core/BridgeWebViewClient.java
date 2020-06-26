@@ -14,8 +14,6 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-
 /**
  * 如果要自定义WebViewClient必须要集成此类
  * Created by bruce on 10/28/15.
@@ -62,7 +60,6 @@ class BridgeWebViewClient extends WebViewClient {
         } else {
             super.onPageStarted(view, url, favicon);
         }
-
     }
 
     @Override

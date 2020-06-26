@@ -9,15 +9,12 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.smallbuer.jsbridge.demo"
-        minSdkVersion 21
+        minSdkVersion 14
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        ndk{
-            abiFilters "armeabi-v7a"
-        }
     }
 
     compileOptions {
@@ -39,7 +36,7 @@ dependencies {
 
     //implementation project(':jsbridge')
 
-    implementation 'com.smallbuer:jsbridge:1.0.2'
+    implementation 'com.smallbuer:jsbridge:1.0.3'
 
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'

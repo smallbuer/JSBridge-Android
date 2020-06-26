@@ -8,6 +8,11 @@ import android.webkit.JavascriptInterface;
 
 import java.util.Map;
 
+/**
+ * Created on 2019/12/10.
+ * @author smallbuer
+ * BaseJavascriptInterface
+ */
 public abstract class BaseJavascriptInterface {
 
     private String TAG = "BaseJavascriptInterface";
