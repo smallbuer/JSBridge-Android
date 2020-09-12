@@ -9,7 +9,7 @@ class JSRequest {
 
     public String callbackId;
 
-    public String data;
+    public Object data;
 
     public String handlerName;
 }
