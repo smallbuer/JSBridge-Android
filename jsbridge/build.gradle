@@ -39,7 +39,7 @@ publish {
     repoName = 'tools'
     groupId = 'com.smallbuer'
     artifactId = 'jsbridge'
-    publishVersion = '1.0.3'
+    publishVersion = '1.0.4'
     desc = 'jsbridge for android'
     website = 'https://github.com/smallbuer/JSBridge-Android'
 }

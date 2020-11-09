@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
+import com.smallbuer.jsbridge.core.BridgeHandler;
 import com.smallbuer.jsbridge.core.BridgeLog;
 import com.smallbuer.jsbridge.core.BridgeTiny;
 import com.smallbuer.jsbridge.core.IWebView;
@@ -18,10 +19,18 @@ import com.tencent.smtt.sdk.WebSettings.LayoutAlgorithm;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created on 2019/12/10.
+ * @author smallbuer
+ * X5Webview extend example
+ */
 public class X5WebView extends WebView implements IWebView {
 	private String TAG = "X5WebView";
 	private BridgeTiny bridgeTiny;
-
+	private Map<String, BridgeHandler> mLocalMessageHandlers = new HashMap<>();
 	@SuppressLint("SetJavaScriptEnabled")
 	public X5WebView(Context arg0, AttributeSet arg1) {
 		super(arg0, arg1);
@@ -93,6 +102,16 @@ public class X5WebView extends WebView implements IWebView {
 	public void destroy() {
 		super.destroy();
 		bridgeTiny.freeMemory();
+	}
+
+	@Override
+	public void addHandlerLocal(String handlerName, BridgeHandler bridgeHandler) {
+		mLocalMessageHandlers.put(handlerName,bridgeHandler);
+	}
+
+	@Override
+	public Map<String, BridgeHandler> getLocalMessageHandlers() {
+		return mLocalMessageHandlers;
 	}
 
 	@Override

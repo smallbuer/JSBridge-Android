@@ -82,6 +82,7 @@ public class BridgeTiny {
         messageJson = messageJson.replaceAll("%7B", URLEncoder.encode("%7B"));
         messageJson = messageJson.replaceAll("%7D", URLEncoder.encode("%7D"));
         messageJson = messageJson.replaceAll("%22", URLEncoder.encode("%22"));
+        messageJson = messageJson.replaceAll("%", URLEncoder.encode("%"));
         String javascriptCommand = String.format(BridgeUtil.JS_HANDLE_MESSAGE_FROM_JAVA, messageJson);
 
         BridgeLog.d(TAG,"javascriptCommand->"+javascriptCommand);

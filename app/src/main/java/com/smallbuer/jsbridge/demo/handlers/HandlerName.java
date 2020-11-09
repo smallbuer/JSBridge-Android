@@ -1,5 +1,6 @@
 package com.smallbuer.jsbridge.demo.handlers;
 
+
 public class HandlerName {
 
     public static final  String HANDLER_NAME_TOAST = "toast";

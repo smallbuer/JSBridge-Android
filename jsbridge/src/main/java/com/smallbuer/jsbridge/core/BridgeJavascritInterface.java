@@ -34,6 +34,12 @@ public class BridgeJavascritInterface extends BaseJavascriptInterface {
         mMainHandler.post(new Runnable() {
             @Override
             public void run() {
+                //higher priority LocalMessageHandlers
+                if(mWebView.getLocalMessageHandlers().containsKey(handlerName)){
+                    BridgeHandler bridgeHandler = mWebView.getLocalMessageHandlers().get(handlerName);
+                    bridgeHandler.handler(mWebView.getContext(),data, new CallBack(callbackId));
+                    return;
+                }
 
                 if(mBridge.getMessageHandlers().containsKey(handlerName)){
                     BridgeHandler bridgeHandler = mBridge.getMessageHandlers().get(handlerName);

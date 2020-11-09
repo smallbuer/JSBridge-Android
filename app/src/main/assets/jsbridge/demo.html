@@ -50,8 +50,6 @@
         }
 
         function testClick1() {
-            var str1 = document.getElementById("text1").value;
-            var str2 = document.getElementById("text2").value;
             //call native method
             window.WebViewJavascriptBridge.callHandler(
                 'toast'
@@ -63,10 +61,6 @@
         }
 
         function testClick2() {
-
-
-            var str1 = document.getElementById("text1").value;
-            var str2 = document.getElementById("text2").value;
             var i = 0;
             var first = setInterval(function(){
                 //call native method
@@ -77,14 +71,12 @@
                         console.log('return->['+ i++ +']'+responseData);
                     }
                 );
-
                 if(i>500){
                     clearInterval(first);
                 }
             }, 10);
 
         }
-
 
         function bridgeLog(logContent) {
             document.getElementById("show").innerHTML = logContent;

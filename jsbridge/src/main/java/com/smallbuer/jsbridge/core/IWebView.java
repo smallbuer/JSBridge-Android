@@ -2,6 +2,8 @@ package com.smallbuer.jsbridge.core;
 
 import android.content.Context;
 
+import java.util.Map;
+
 /**
  * Created on 2019/12/10.
  * Author: smallbuer
@@ -10,6 +12,10 @@ import android.content.Context;
 public interface IWebView {
 
      void loadUrl(String url);
+
+     void addHandlerLocal(String handlerName,BridgeHandler bridgeHandler);
+
+     Map<String, BridgeHandler> getLocalMessageHandlers();
 
      void addJavascriptInterface(Object obj, String interfaceName);
 

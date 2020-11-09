@@ -8,6 +8,10 @@ import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created on 2019/12/10.
  * Author: smallbuer
@@ -21,6 +25,7 @@ public class BridgeWebView extends WebView implements IWebView {
     private BridgeTiny bridgeTiny;
     private BridgeWebViewClient mClient;
     private BridgeWebviewChromeClient mChromeClient;
+    private Map<String, BridgeHandler> mLocalMessageHandlers = new HashMap<>();
     public BridgeWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
@@ -65,6 +70,17 @@ public class BridgeWebView extends WebView implements IWebView {
     public void destroy() {
         super.destroy();
         bridgeTiny.freeMemory();
+    }
+
+    @Override
+    public void addHandlerLocal(String handlerName,BridgeHandler bridgeHandler) {
+
+        mLocalMessageHandlers.put(handlerName,bridgeHandler);
+    }
+
+    @Override
+    public Map<String, BridgeHandler> getLocalMessageHandlers() {
+        return mLocalMessageHandlers;
     }
 
     @Override

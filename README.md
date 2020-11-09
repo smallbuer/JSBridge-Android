@@ -1,5 +1,5 @@
 #### JSBridge-Android
-[ ![Download](https://api.bintray.com/packages/smallbuer/tools/jsbridge/images/download.svg?version=1.0.3) ](https://bintray.com/smallbuer/tools/jsbridge/1.0.3/link)   [![Release Version](https://img.shields.io/badge/release-1.0.3-red.svg)](https://github.com/smallbuer/JSBridge-Android/releases)   [![Platform](https://img.shields.io/badge/Platform-Android-brightgreen.svg)](https://github.com/smallbuer/JSBridge-Android)
+[ ![Download](https://api.bintray.com/packages/smallbuer/tools/jsbridge/images/download.svg?version=1.0.4) ](https://bintray.com/smallbuer/tools/jsbridge/1.0.4/link)   [![Release Version](https://img.shields.io/badge/release-1.0.4-red.svg)](https://github.com/smallbuer/JSBridge-Android/releases)   [![Platform](https://img.shields.io/badge/Platform-Android-brightgreen.svg)](https://github.com/smallbuer/JSBridge-Android)
 ### 简介
 
 本项目来源于 lzyzsd的[JsBridge](https://github.com/lzyzsd/JsBridge)，由于作者长时间未修复部分代码丢失问题，所以目前存在的调用丢失问题以及效率问题无法在原项目得到回应，所以重构了目前js文件以及java类；
@@ -88,6 +88,19 @@ public class ToastBridgeHandler extends BridgeHandler {
 
 其中HandlerName.HANDLER_NAME_TOAST等常量即为原生功能的名称标示，用于H5调用需要指定，参考4
 
+>对原生功能进行局部注册，方便在Activity和Fragment中进行桥的注册；
+```java
+//local register bridge
+bridgeWebview.addHandlerLocal(HandlerName.HANDLER_NAME_TOAST,object: BridgeHandler(){
+    override fun handler(context: Context?, data: String?, function: CallBackFunction?) {
+        Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
+    }
+})
+```
+
+拿到页面中的webview对象后，调用addHandlerLocal方法进行注册局部桥，可以用来新增桥和替换全局的桥，便于业务定制；
+
+支持版本1.0.4+；
 
 
 

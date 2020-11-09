@@ -1,12 +1,16 @@
 package com.smallbuer.jsbridge.demo
 
 import android.Manifest
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.smallbuer.jsbridge.core.BridgeHandler
+import com.smallbuer.jsbridge.core.CallBackFunction
+import com.smallbuer.jsbridge.demo.handlers.HandlerName
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -55,6 +59,14 @@ class MainActivity : AppCompatActivity() , RadioGroup.OnCheckedChangeListener {
                 Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
             }
         }
+        //local register bridge
+        x5Webview.addHandlerLocal(HandlerName.HANDLER_NAME_TOAST,object: BridgeHandler(){
+            override fun handler(context: Context?, data: String?, function: CallBackFunction?) {
+                Log.i(TAG, "YY reponse data from js $data"+",Thread is "+Thread.currentThread().name)
+                Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
+            }
+        })
+
 
     }
 
@@ -75,6 +87,15 @@ class MainActivity : AppCompatActivity() , RadioGroup.OnCheckedChangeListener {
                 Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
             }
         }
+        //local register bridge
+        bridgeWebview.addHandlerLocal(HandlerName.HANDLER_NAME_TOAST,object: BridgeHandler(){
+            override fun handler(context: Context?, data: String?, function: CallBackFunction?) {
+                Log.i(TAG, "YY reponse data from js $data"+",Thread is "+Thread.currentThread().name)
+                Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
+            }
+        })
+
+
 
     }
 
@@ -96,6 +117,13 @@ class MainActivity : AppCompatActivity() , RadioGroup.OnCheckedChangeListener {
                 Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
             }
         }
+        //local register bridge
+        ucWebview.addHandlerLocal(HandlerName.HANDLER_NAME_TOAST,object: BridgeHandler(){
+            override fun handler(context: Context?, data: String?, function: CallBackFunction?) {
+                Log.i(TAG, "YY reponse data from js $data"+",Thread is "+Thread.currentThread().name)
+                Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
+            }
+        })
 
     }
 

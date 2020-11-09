@@ -7,6 +7,7 @@ import android.webkit.ValueCallback;
 
 import androidx.annotation.Nullable;
 
+import com.smallbuer.jsbridge.core.BridgeHandler;
 import com.smallbuer.jsbridge.core.BridgeLog;
 import com.smallbuer.jsbridge.core.BridgeTiny;
 import com.smallbuer.jsbridge.core.IWebView;
@@ -17,11 +18,19 @@ import com.uc.webview.export.WebSettings;
 import com.uc.webview.export.WebView;
 import com.uc.webview.export.WebViewClient;
 
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created on 2019/12/10.
+ * @author smallbuer
+ * UCWebView extend example
+ */
 public class UCWebView extends WebView implements IWebView {
 
 	private String TAG = "UCWebView";
 	private BridgeTiny bridgeTiny;
-
+	private Map<String, BridgeHandler> mLocalMessageHandlers = new HashMap<>();
 	@SuppressLint("SetJavaScriptEnabled")
 	public UCWebView(Context arg0, AttributeSet arg1) {
 		super(arg0, arg1);
@@ -90,6 +99,15 @@ public class UCWebView extends WebView implements IWebView {
 		bridgeTiny.freeMemory();
 	}
 
+	@Override
+	public void addHandlerLocal(String handlerName, BridgeHandler bridgeHandler) {
+		mLocalMessageHandlers.put(handlerName,bridgeHandler);
+	}
+
+	@Override
+	public Map<String, BridgeHandler> getLocalMessageHandlers() {
+		return mLocalMessageHandlers;
+	}
 	@Override
 	public void evaluateJavascript(String var1,@Nullable Object object) {
 		if(object == null){
