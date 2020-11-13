@@ -170,6 +170,11 @@ window.WebViewJavascriptBridge.callHandler(
             );
 ```
 
+## 混淆
+
+```
+-keep class com.smallbuer.jsbridge.core.** { *; }
+```
 
 ## License
 
