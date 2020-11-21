@@ -37,7 +37,7 @@ repositories {
 ```
 
 dependencies {
-      implementation 'com.smallbuer:jsbridge:1.0.3'
+      implementation 'com.smallbuer:jsbridge:1.0.4'
 }
 ```
 
