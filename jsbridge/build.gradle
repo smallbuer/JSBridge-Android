@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'maven'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -8,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 104
+        versionName "1.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -26,20 +27,22 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compileOnly 'com.google.code.gson:gson:2.8.5'
+    compileOnly 'com.google.code.gson:gson:2.8.6'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
+ext {
+    // These could be set globally
+    PUBLISH_GROUP_ID = 'com.smallbuer'
+    PUBLISH_VERSION = '1.0.4'
 
-//添加
-publish {
-    userOrg = 'smallbuer'
-    repoName = 'tools'
-    groupId = 'com.smallbuer'
-    artifactId = 'jsbridge'
-    publishVersion = '1.0.4'
-    desc = 'jsbridge for android'
-    website = 'https://github.com/smallbuer/JSBridge-Android'
+    // These should be module-dependent
+    PUBLISH_ARTIFACT_ID = 'jsbridge'
+    ARTIFACT_DESCRIPTION = POM_DESCRIPTION
+    uploadJavadocs = false
+    uploadSources = false
 }
+
+apply from: "${rootProject.projectDir}/publish-mavencentral.gradle"

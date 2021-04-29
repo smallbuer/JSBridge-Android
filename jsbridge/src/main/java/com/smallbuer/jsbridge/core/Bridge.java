@@ -35,14 +35,13 @@ public enum Bridge {
 
     /**
      * register handler,so that javascript can call it
-     * 注册处理程序,以便javascript调用它
      *
      * @param handlerName handlerName
      * @param handler     BridgeHandler
      */
     public void registerHandler(String handlerName, BridgeHandler handler) {
         if (handler != null) {
-            // 添加至 Map<String, BridgeHandler>
+            // add to Map<String, BridgeHandler>
             mMessageHandlers.put(handlerName, handler);
         }
     }
@@ -50,7 +49,6 @@ public enum Bridge {
 
     /**
      * register handler,so that javascript can call it
-     * 注册处理程序,以便javascript调用它
      *
      * @param handlers handlerName
      */

@@ -40,7 +40,7 @@ public class BridgeTiny {
         if (Build.VERSION.SDK_INT >= 17) {
             webView.addJavascriptInterface(new BridgeJavascritInterface(mCallbacks, this, webView), "jsbridge");
         }else {
-            //4.2之前 addJavascriptInterface有安全泄漏风险
+            //before 4.2 addJavascriptInterface has security risk
             webView.removeJavascriptInterface("searchBoxJavaBridge_");
             webView.removeJavascriptInterface("accessibility");
             webView.removeJavascriptInterface("accessibilityTraversal");
@@ -68,14 +68,14 @@ public class BridgeTiny {
     }
 
     /**
-     * 分发message 必须在主线程才分发成功
+     * dispatch message ,must be at main thread
      *
      * @param message Message
      */
     public void dispatchMessage(Object message) {
 
         String messageJson = new Gson().toJson(message);
-        //escape special characters for json string  为json字符串转义特殊字符
+        //escape special characters for json string
         messageJson = messageJson.replaceAll("(\\\\)([^utrn])", "\\\\\\\\$1$2");
         messageJson = messageJson.replaceAll("(?<=[^\\\\])(\")", "\\\\\"");
         messageJson = messageJson.replaceAll("(?<=[^\\\\])(\')", "\\\\\'");
@@ -87,7 +87,7 @@ public class BridgeTiny {
 
         BridgeLog.d(TAG,"javascriptCommand->"+javascriptCommand);
 
-        // 必须要找主线程才会将数据传递出去 --- 划重点
+        // the data must be passed on the main thread --- focus
         if (Thread.currentThread() == Looper.getMainLooper().getThread()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT&&javascriptCommand.length()>=BridgeUtil.URL_MAX_CHARACTER_NUM) {
                 mWebView.evaluateJavascript(javascriptCommand,null);
@@ -123,7 +123,7 @@ public class BridgeTiny {
 
 
     /**
-     * 保存message到消息队列
+     * Save the message to the message queue
      *
      * @param handlerName      handlerName
      * @param data             data
@@ -150,7 +150,7 @@ public class BridgeTiny {
 
 
     /**
-     * list<message> != null 添加到消息集合否则分发消息
+     * list<message> != null Add to the message collection otherwise distribute the message
      *
      * @param message Message
      */

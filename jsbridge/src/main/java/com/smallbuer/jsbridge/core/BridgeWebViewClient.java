@@ -15,7 +15,7 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 /**
- * 如果要自定义WebViewClient必须要集成此类
+ * If you want to customize WebViewClient, you must integrate this class
  * Created by bruce on 10/28/15.
  */
 class BridgeWebViewClient extends WebViewClient {
