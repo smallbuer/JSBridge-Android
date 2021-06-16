@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 29
-        versionCode 104
-        versionName "1.0.4"
+        versionCode 105
+        versionName "1.0.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -36,7 +36,7 @@ dependencies {
 ext {
     // These could be set globally
     PUBLISH_GROUP_ID = 'com.smallbuer'
-    PUBLISH_VERSION = '1.0.4'
+    PUBLISH_VERSION = '1.0.5'
 
     // These should be module-dependent
     PUBLISH_ARTIFACT_ID = 'jsbridge'
