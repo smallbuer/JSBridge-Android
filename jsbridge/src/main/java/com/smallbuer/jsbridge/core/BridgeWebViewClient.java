@@ -18,7 +18,7 @@ import android.webkit.WebViewClient;
  * If you want to customize WebViewClient, you must integrate this class
  * Created by bruce on 10/28/15.
  */
-class BridgeWebViewClient extends WebViewClient {
+public class BridgeWebViewClient extends WebViewClient {
 
     private WebViewClient mClient;
     private BridgeTiny bridgeTiny;
