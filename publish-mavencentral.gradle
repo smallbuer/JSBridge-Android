@@ -65,7 +65,7 @@ publishing {
             artifactId PUBLISH_ARTIFACT_ID
             version PUBLISH_VERSION
             if (project.plugins.findPlugin("com.android.library")) {
-                artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+                artifact("$buildDir/outputs/aar/${project.getName()}-${version}.aar")
             } else {
                 artifact("$buildDir/libs/${project.getName()}-${version}.jar")
             }

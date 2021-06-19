@@ -75,6 +75,13 @@
         android:layout_height="wrap_content"
         android:text="Native To JS" />
 
+    <Button
+        android:id="@+id/btnTestShouldIntercept"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="shouldInterceptRequest" />
+
+
     <com.smallbuer.jsbridge.core.BridgeWebView
         android:id="@+id/bridgeWebview"
         android:layout_width="match_parent"

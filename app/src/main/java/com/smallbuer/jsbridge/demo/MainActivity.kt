@@ -2,13 +2,19 @@ package com.smallbuer.jsbridge.demo
 
 import android.Manifest
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebView
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.smallbuer.jsbridge.core.BridgeHandler
+import com.smallbuer.jsbridge.core.BridgeTiny
+import com.smallbuer.jsbridge.core.BridgeWebViewClient
 import com.smallbuer.jsbridge.core.CallBackFunction
 import com.smallbuer.jsbridge.demo.handlers.HandlerName
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -77,16 +83,36 @@ class MainActivity : AppCompatActivity() , RadioGroup.OnCheckedChangeListener {
 
         Log.i(TAG,"initBridgeWebView...")
 
+        //------------------如果不需要对URL拦截处理业务逻辑,以下对webViewClient的自定义操作可不写--------
+        var bridgeTiny = BridgeTiny(bridgeWebview)
+        bridgeWebview.webViewClient = object: BridgeWebViewClient(bridgeWebview,bridgeTiny){
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                Log.i(TAG, "shouldOverrideUrlLoading url:$url")
+                return super.shouldOverrideUrlLoading(view, url)
+            }
+            override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.i(TAG, "shouldInterceptRequest url:${request?.url.toString()}")
+                }
+                return super.shouldInterceptRequest(view, request)
+            }
+        }
+        //-------------------------------------end--------------------------------------------------
+        
         bridgeWebview.loadUrl(url)
-
         btnNativeToJsBridgeWebView.setOnClickListener{
-
             bridgeWebview.callHandler("functionInJs", "我是原生传递的参数") { data ->
-
                 Log.i(TAG, "reponse data from js $data"+",Thread is "+Thread.currentThread().name)
                 Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
             }
         }
+
+        //点击此按钮后,可以通过参考shouldInterceptRequest回调拦截url,根据自己业务拦截指定的URL进行处理
+        btnTestShouldIntercept.setOnClickListener {
+            bridgeWebview.loadUrl("https://www.baidu.com")
+        }
+
         //local register bridge
         bridgeWebview.addHandlerLocal(HandlerName.HANDLER_NAME_TOAST,object: BridgeHandler(){
             override fun handler(context: Context?, data: String?, function: CallBackFunction?) {
@@ -94,6 +120,7 @@ class MainActivity : AppCompatActivity() , RadioGroup.OnCheckedChangeListener {
                 Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
             }
         })
+
 
 
 
