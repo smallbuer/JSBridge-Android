@@ -8,10 +8,10 @@
 主要修改如下：
 
 不再使用URL SHEME拦截方式，直接采用webview的addJavaScriptInterface,此方法根据Android源码跟踪，是目前采用webview方案js与原生交互效率最高的一种系统实现；
-对于API小于17的使用者，1.0.3版本将支持版本降低到14，满足一些朋友的需要，为了安全主要实现方式利用onJsPrompt方法让H5可以和原生进行交互，并且移除了低版本的三个危险漏洞；
+对于API小于17的使用者，1.0.3版本将支持版本降低到14，满足一些朋友的需要;
+在1.0.6将BridgeWebViewClient设置为Public,方便业务层进行拦截URL处理；
 
-1.0.6将BridgeWebViewClient设置为Public,方便业务层进行拦截URL处理；
-
+为了安全主要实现方式利用onJsPrompt方法让H5可以和原生进行交互，并且移除了低版本的三个危险漏洞；
 ```
 //4.2之前addJavascriptInterface有安全泄漏风险，进行移除
 webView.removeJavascriptInterface("searchBoxJavaBridge_");
