@@ -1,5 +1,5 @@
 #### JSBridge-Android
-[![Download](https://img.shields.io/badge/Download-1.0.6-brightgreen.svg)](https://search.maven.org/artifact/com.smallbuer/jsbridge/)   [![Release Version](https://img.shields.io/badge/release-1.0.6-red.svg)](https://github.com/smallbuer/JSBridge-Android/releases)   [![Maven Central](https://img.shields.io/badge/Maven Central-1.0.6-brightgreen.svg)](https://search.maven.org/artifact/com.smallbuer/jsbridge/1.0.6/aar)  [![Platform](https://img.shields.io/badge/Platform-Android-brightgreen.svg)](https://github.com/smallbuer/JSBridge-Android)
+[![Download](https://img.shields.io/badge/Download-1.0.6-brightgreen.svg)](https://search.maven.org/artifact/com.smallbuer/jsbridge/)   [![Release Version](https://img.shields.io/badge/release-1.0.6-red.svg)](https://github.com/smallbuer/JSBridge-Android/releases)   [![Maven Central](https://img.shields.io/badge/Maven%20Central-1.0.6-brightgreen.svg)](https://search.maven.org/artifact/com.smallbuer/jsbridge/1.0.6/aar)  [![Platform](https://img.shields.io/badge/Platform-Android-brightgreen.svg)](https://github.com/smallbuer/JSBridge-Android)
 
 ### 简介
 
