@@ -34,7 +34,7 @@ JS源文件在java代码中已经做了压缩处理，此文件只为了供大�
 ```
 
 repositories {
-        jcenter()
+        mavenCentral()
 }
 ```
 2.然后在模块的build.gradle(Module) 的 dependencies 添加:
