@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme"
         android:networkSecurityConfig="@xml/network_security_config"
         >
-        <activity android:name="com.smallbuer.jsbridge.demo.MainActivity">
+        <activity android:name="com.smallbuer.jsbridge.demo.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
