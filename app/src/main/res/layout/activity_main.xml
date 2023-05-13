@@ -12,28 +12,6 @@
         android:text="@string/string_name_extend"
         android:textColor="@android:color/white"></TextView>
 
-
-    <RadioGroup
-        android:id="@+id/group1"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-    <RadioButton
-        android:id="@+id/radioX5WebView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="X5WebView"/>
-    <RadioButton
-        android:id="@+id/radioUcWebView"
-        android:checked="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="UCWebView"/>
-
-    </RadioGroup>
-
     <Button
         android:id="@+id/btnNativeToJsX5"
         android:layout_width="match_parent"
@@ -45,21 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
-
-    <Button
-        android:id="@+id/btnNativeToJsUc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="Native To JS" />
-
-    <com.smallbuer.jsbridge.demo.view.X5WebView
-        android:id="@+id/ucWebview"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
-
 
     <TextView
         android:layout_width="match_parent"
