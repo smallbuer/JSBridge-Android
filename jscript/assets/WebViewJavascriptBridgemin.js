@@ -57,10 +57,16 @@
             callbackId = '';
         }
         //正常JS桥调用
+        var lastMessage;
+         if(typeof message === 'string'){
+             lastMessage = message;
+         }else{
+             lastMessage = JSON.stringify(message);
+         }
         if(moduleName == 'jsbridge'&& handlerName!='response'){
-            prompt('{\"handlerName\":' + handlerName + ',\"data\":' +  JSON.stringify(message) + ',\"callbackId\":' +  callbackId + '}');
+            prompt('{\"handlerName\":' + handlerName + ',\"data\":' + lastMessage + ',\"callbackId\":' + callbackId + '}');
         }else{
-            prompt('{\"data\":' +  JSON.stringify(message) + ',\"callbackId\":' +  callbackId + '}');
+            prompt('{\"data\":' + lastMessage + ',\"callbackId\":' + callbackId + '}');
         }
     }
 

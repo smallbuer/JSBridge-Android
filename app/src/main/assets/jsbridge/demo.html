@@ -39,7 +39,8 @@
             var str1 = document.getElementById("text1").value;
             var str2 = document.getElementById("text2").value;
 
-            var data = {url: 'www.baidu.com', userName: str1, passwd: str2};
+            //var data = {url: 'www.baidu.com', userName: str1, passwd: str2};
+            var data = '{"name":"张三","age":18,"gender":"男"}'
             window.WebViewJavascriptBridge.callHandler('request',
                 data
                 , function(responseData) {

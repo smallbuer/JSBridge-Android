@@ -7,6 +7,9 @@ import com.smallbuer.jsbridge.core.BridgeHandler;
 import com.smallbuer.jsbridge.core.BridgeLog;
 import com.smallbuer.jsbridge.core.CallBackFunction;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class RequestBridgeHandler extends BridgeHandler {
 
     private String TAG = "RequestBridgeHandler";
@@ -15,6 +18,14 @@ public class RequestBridgeHandler extends BridgeHandler {
     public void handler(Context context,String data, CallBackFunction function) {
 
         BridgeLog.d(TAG,"data->"+data+",Thread is "+Thread.currentThread().getName());
+
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            BridgeLog.d(TAG,"jsonObject->"+jsonObject.toString()+",Thread is "+Thread.currentThread().getName());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
         //a network request .....
         //callback

@@ -1,5 +1,5 @@
 #### JSBridge-Android
-[![Download](https://img.shields.io/badge/Download-1.0.6-brightgreen.svg)](https://search.maven.org/artifact/com.smallbuer/jsbridge/)   [![Release Version](https://img.shields.io/badge/release-1.0.6-red.svg)](https://github.com/smallbuer/JSBridge-Android/releases)   [![Maven Central](https://img.shields.io/badge/Maven%20Central-1.0.6-brightgreen.svg)](https://search.maven.org/artifact/com.smallbuer/jsbridge/1.0.6/aar)  [![Platform](https://img.shields.io/badge/Platform-Android-brightgreen.svg)](https://github.com/smallbuer/JSBridge-Android)
+[![Download](https://img.shields.io/badge/Download-1.0.7-brightgreen.svg)](https://search.maven.org/artifact/com.smallbuer/jsbridge/)   [![Release Version](https://img.shields.io/badge/release-1.0.7-red.svg)](https://github.com/smallbuer/JSBridge-Android/releases)   [![Maven Central](https://img.shields.io/badge/Maven%20Central-1.0.7-brightgreen.svg)](https://search.maven.org/artifact/com.smallbuer/jsbridge/1.0.7/aar)  [![Platform](https://img.shields.io/badge/Platform-Android-brightgreen.svg)](https://github.com/smallbuer/JSBridge-Android)
 
 ### 简介
 
@@ -10,6 +10,7 @@
 不再使用URL SHEME拦截方式，直接采用webview的addJavaScriptInterface,此方法根据Android源码跟踪，是目前采用webview方案js与原生交互效率最高的一种系统实现；
 对于API小于17的使用者，1.0.3版本将支持版本降低到14，满足一些朋友的需要;
 在1.0.6将BridgeWebViewClient设置为Public,方便业务层进行拦截URL处理；
+在1.0.7中注入的JS文件会对H5调用JS桥传递的参数进行校验，避免两层引号问题；
 
 为了安全主要实现方式利用onJsPrompt方法让H5可以和原生进行交互，并且移除了低版本的三个危险漏洞；
 ```
@@ -41,7 +42,7 @@ repositories {
 ```
 
 dependencies {
-      implementation 'com.smallbuer:jsbridge:1.0.6'
+      implementation 'com.smallbuer:jsbridge:1.0.7'
 }
 ```
 

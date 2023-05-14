@@ -77,10 +77,16 @@
 
              var fnwindow = eval(evalStr);
              var responseData;
-             if(moduleName == 'jsbridge'&& handlerName !='response'){
-                responseData = fn.call(fnwindow,handlerName,JSON.stringify(message),callbackId);
+             var lastMessage;
+             if(typeof message === 'string'){
+                 lastMessage = message;
              }else{
-                responseData = fn.call(fnwindow,JSON.stringify(message),callbackId);
+                 lastMessage = JSON.stringify(message);
+             }
+             if(moduleName == 'jsbridge'&& handlerName !='response'){
+                responseData = fn.call(fnwindow,handlerName,lastMessage,callbackId);
+             }else{
+                responseData = fn.call(fnwindow,lastMessage,callbackId);
              }
              if(responseData){
                  responseCallback = responseCallbacks[callbackId];

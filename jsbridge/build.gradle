@@ -35,7 +35,7 @@ dependencies {
 ext {
     // These could be set globally
     PUBLISH_GROUP_ID = 'com.smallbuer'
-    PUBLISH_VERSION = '1.0.6'
+    PUBLISH_VERSION = '1.0.7'
 
     // These should be module-dependent
     PUBLISH_ARTIFACT_ID = 'jsbridge'
