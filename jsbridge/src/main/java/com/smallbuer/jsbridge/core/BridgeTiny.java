@@ -130,12 +130,12 @@ public class BridgeTiny {
      * @param responseCallback OnBridgeCallback
      */
     public void callHandler(String handlerName, Object data, OnBridgeCallback responseCallback) {
-        if (!(data instanceof String)){
-            return;
-        }
+//        if (!(data instanceof String)){
+//            return;
+//        }
         JSRequest request = new JSRequest();
         if (data != null) {
-            request.data = (String) data;
+            request.data = data;
         }
         if (responseCallback != null) {
             String callbackId = String.format(BridgeUtil.CALLBACK_ID_FORMAT, (++mUniqueId) + (BridgeUtil.UNDERLINE_STR + SystemClock.currentThreadTimeMillis()));
